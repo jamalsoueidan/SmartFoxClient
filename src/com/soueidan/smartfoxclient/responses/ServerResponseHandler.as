@@ -1,12 +1,12 @@
-package com.soueidan.smartfoxserver.responseHandlers
+package com.soueidan.smartfoxclient.responses
 {
 	import com.smartfoxserver.v2.SmartFox;
 	import com.smartfoxserver.v2.core.SFSEvent;
-	import com.soueidan.smartfoxserver.core.Connector;
+	import com.soueidan.smartfoxclient.core.SmartFoxClient;
 
-	public class BaseClientResponseHandler
+	public class ServerResponseHandler
 	{
-		protected var _server:Connector = Connector.getInstance();
+		protected var _server:SmartFoxClient = SmartFoxClient.getInstance();
 		private var _action:String;
 		
 		public function get action():String

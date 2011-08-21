@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="false" version="3">
   <includeClasses>
-    <classEntry path="com.soueidan.smartfoxserver.core.Connector"/>
-    <classEntry path="com.soueidan.smartfoxserver.responseHandlers.BaseClientResponseHandler"/>
+    <classEntry path="com.soueidan.smartfoxclient.core.SmartFoxClient"/>
+    <classEntry path="com.soueidan.smartfoxclient.responses.ServerResponseHandler"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

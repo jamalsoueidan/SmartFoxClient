@@ -1,22 +1,22 @@
-package com.soueidan.smartfoxserver.core
+package com.soueidan.smartfoxclient.core
 {
 	import com.smartfoxserver.v2.*;
 	import com.smartfoxserver.v2.core.*;
 	import com.smartfoxserver.v2.entities.*;
 	import com.smartfoxserver.v2.entities.data.*;
 	import com.smartfoxserver.v2.requests.*;
-	import com.soueidan.smartfoxserver.responseHandlers.BaseClientResponseHandler;
+	import com.soueidan.smartfoxclient.responses.ServerResponseHandler;
 	
 	import mx.collections.ArrayCollection;
 	
-	public class Connector extends SmartFox
+	public class SmartFoxClient extends SmartFox
 	{
-		static private var _instance:Connector;
+		static private var _instance:SmartFoxClient;
 		static private var _currentRoom:String;
 		
 		private var _responseHandlers:Object = {};
 		
-		public function Connector(debug:Boolean=false)
+		public function SmartFoxClient(debug:Boolean=false)
 		{
 			super(debug);
 			
@@ -26,9 +26,9 @@ package com.soueidan.smartfoxserver.core
 			loadConfig("config.xml");
 		}
 		
-		static public function getInstance():Connector {
+		static public function getInstance():SmartFoxClient {
 			if ( !_instance ) {
-				_instance = new Connector();
+				_instance = new SmartFoxClient();
 			}
 			
 			return _instance;
@@ -75,7 +75,7 @@ package com.soueidan.smartfoxserver.core
 			
 			trace("Executing", action);
 			
-			var handler:BaseClientResponseHandler;
+			var handler:ServerResponseHandler;
 			for each(var theClass:* in handlers) {
 				handler = new theClass();
 				handler.action = action;
