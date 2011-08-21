@@ -5,6 +5,7 @@ package com.soueidan.smartfoxclient.core
 	import com.smartfoxserver.v2.entities.*;
 	import com.smartfoxserver.v2.entities.data.*;
 	import com.smartfoxserver.v2.requests.*;
+	import com.soueidan.smartfoxclient.callbacks.ICallback;
 	import com.soueidan.smartfoxclient.responses.ServerResponseHandler;
 	
 	import mx.collections.ArrayCollection;
@@ -62,6 +63,11 @@ package com.soueidan.smartfoxclient.core
 			
 			handlers.push(theClass);
 			_responseHandlers[requestId] = handlers;
+		}
+		
+		public function addCallBack(request:ICallback, theClass:*):void {
+			addResponseHandler(request.action, theClass);
+			send(request);
 		}
 		
 		private function responseHandler(event:SFSEvent):void {

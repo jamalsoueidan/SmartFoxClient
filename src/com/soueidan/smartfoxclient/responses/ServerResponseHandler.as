@@ -2,6 +2,7 @@ package com.soueidan.smartfoxclient.responses
 {
 	import com.smartfoxserver.v2.SmartFox;
 	import com.smartfoxserver.v2.core.SFSEvent;
+	import com.soueidan.smartfoxclient.callbacks.ICallback;
 	import com.soueidan.smartfoxclient.core.SmartFoxClient;
 
 	public class ServerResponseHandler
@@ -20,6 +21,7 @@ package com.soueidan.smartfoxclient.responses
 		}
 
 		public function handleServerResponse(event:SFSEvent):void {
+			
 		}
 	}
 }
