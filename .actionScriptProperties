@@ -35,7 +35,7 @@
           </libraryPathEntry>
         </excludedEntries>
       </libraryPathEntry>
-      <libraryPathEntry kind="3" linkType="1" path="/Applications/SFS2X-RC1a/Client/Flash/API/SFS2X_API_AS3.swc" useDefaultLinkType="false"/>
+      <libraryPathEntry kind="3" linkType="1" path="/Applications/SFS2X-RC1a/SFS2X-PatchRC3/ClientAPI/ActionScript3/SFS2X_API_AS3.swc" useDefaultLinkType="false"/>
     </libraryPath>
     <sourceAttachmentPath/>
   </compiler>

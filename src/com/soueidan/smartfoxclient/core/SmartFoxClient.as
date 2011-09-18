@@ -12,62 +12,33 @@ package com.soueidan.smartfoxclient.core
 	
 	public class SmartFoxClient extends SmartFox
 	{
-		static private var _instance:SmartFoxClient;
-		static private var _currentRoom:String;
-		
+		private var _parameters:Object;
 		private var _responseHandlers:Object = {};
+		private var _xml:XML;
 		
-		public function SmartFoxClient(debug:Boolean=false)
-		{
-			super(debug);
+		public function set parameters(value:Object):void {
+			_parameters = value;
+		}
+		
+		public function get gameId():int {
+			return _xml.id;
+		}
+		
+		public function get currentRoom():Room {
+			return getRoomByName(_parameters.room);
+		}
+		
+		public function start(xmlData:String):void {
+			if ( !_parameters ) {
+				throw new Error("You need to assign parameters instance first");
+			}
 			
 			addEventListener(SFSEvent.CONNECTION, connection);
 			addEventListener(SFSEvent.EXTENSION_RESPONSE, responseHandler);
 			
-			loadConfig("config.xml");
-		}
-		
-		static public function getInstance():SmartFoxClient {
-			if ( !_instance ) {
-				_instance = new SmartFoxClient();
-			}
+			_xml = new XML(xmlData);
 			
-			return _instance;
-		}
-		
-		public function get currentRoom():Room {
-			return getRoomByName(_currentRoom);
-		}
-		
-		private function connection(evt:SFSEvent):void
-		{	
-			trace("connectionMade");
-			var params:ISFSObject = new SFSObject();
-			/*params.putUtfString("session", ExternalInterface.call("getParams", "sid"));//CookieManager.getSession());
-			
-			_currentRoom  = ExternalInterface.call("getParams", "rid")
-			params.putUtfString("room", _currentRoom);*/
-			
-			_currentRoom = "testerne";
-			
-			trace("sendRequest");
-			var login:LoginRequest = new LoginRequest("default", null, null, params);	
-			send(login);
-		}
-		
-		public function addResponseHandler(requestId:String, theClass:*):void {
-			var handlers:Array = _responseHandlers[requestId];
-			if ( !handlers) {
-				handlers = new Array();
-			}
-			
-			handlers.push(theClass);
-			_responseHandlers[requestId] = handlers;
-		}
-		
-		public function addCallBack(request:ICallback, theClass:*):void {
-			addResponseHandler(request.action, theClass);
-			send(request);
+			connect(_xml.host, _xml.port);
 		}
 		
 		private function responseHandler(event:SFSEvent):void {
@@ -88,5 +59,29 @@ package com.soueidan.smartfoxclient.core
 				handler.handleServerResponse(event)
 			}
 		}
+		
+		public function addResponseHandler(requestId:String, theClass:*):void {
+			var handlers:Array = _responseHandlers[requestId];
+			if ( !handlers) {
+				handlers = new Array();
+			}
+			
+			handlers.push(theClass);
+			_responseHandlers[requestId] = handlers;
+		}
+		
+		
+		private function connection(event:SFSEvent):void
+		{
+			trace("connection made");
+			
+			var params:ISFSObject = new SFSObject();
+			params.putUtfString("session", _parameters.session);
+			params.putUtfString("room", _parameters.room);
+			params.putInt("game_id", _xml.id);
+			
+			var request:IRequest = new LoginRequest("","",_xml.zone, params);
+			send(request);
+		}	
 	}
 }

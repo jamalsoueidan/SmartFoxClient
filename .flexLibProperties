@@ -5,6 +5,8 @@
     <classEntry path="com.soueidan.smartfoxclient.responses.ServerResponseHandler"/>
     <classEntry path="com.soueidan.smartfoxclient.callbacks.ICallback"/>
     <classEntry path="com.soueidan.smartfoxclient.callbacks.CallBack"/>
+    <classEntry path="com.soueidan.smartfoxclient.managers.SmartFoxManager"/>
+    <classEntry path="com.soueidan.smartfoxclient.managers.UserManager"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
